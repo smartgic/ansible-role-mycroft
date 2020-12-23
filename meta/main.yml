@@ -17,6 +17,7 @@ galaxy_info:
   galaxy_tags:
     - mycroft
     - picroft
-    - voiceassistant
+    - mycroftai
+    - voice-assistant
 
 dependencies: []
