@@ -22,7 +22,7 @@
   loop:
     - "{{ _mycroft_skills_directory }}"
     - "{{ _mycroft_logs_directory }}"
-  become: true
+  become: yes
 
 - name: Create .mycroft directory
   file:

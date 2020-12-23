@@ -16,7 +16,7 @@
     requirements: "{{ _mycroft_core_directory }}/requirements/requirements.txt"
     virtualenv: "{{ _mycroft_core_directory }}/.venv"
     virtualenv_command: python3 -m venv
-    virtualenv_site_packages: true
+    virtualenv_site_packages: yes
 
 - name: Add mycroft-core to the virtualenv path
   vars:

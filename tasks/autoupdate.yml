@@ -21,4 +21,4 @@
 - name: Enable Mycroft AI autoupdate service
   systemd:
     name: mycroft-autoupdate
-    enabled: true
+    enabled: yes

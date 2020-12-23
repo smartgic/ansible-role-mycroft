@@ -53,5 +53,5 @@
 
 - name: Packages cleaning
   apt:
-    autoclean: true
-    autoremove: true
+    autoclean: yes
+    autoremove: yes

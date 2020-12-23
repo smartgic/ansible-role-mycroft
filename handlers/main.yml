@@ -1,13 +1,13 @@
 ---
 - name: daemon-reload
   systemd:
-    daemon-reload: true
+    daemon-reload: yes
 
 - name: restart-mycroft
   systemd:
     name: "{{ item }}"
     state: restarted
-    enabled: true
+    enabled: yes
   loop: "{{ _mycroft_services }}"
 
 - name: restart-mycroft-skills

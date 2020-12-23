@@ -15,6 +15,6 @@
 - name: Start Mycroft AI services
   systemd:
     name: "{{ item }}"
-    enabled: true
+    enabled: yes
     state: started
   loop: "{{ _mycroft_services }}"
