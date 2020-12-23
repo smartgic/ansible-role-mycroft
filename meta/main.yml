@@ -18,6 +18,6 @@ galaxy_info:
     - mycroft
     - picroft
     - mycroftai
-    - voice-assistant
+    - voiceassistant
 
 dependencies: []
