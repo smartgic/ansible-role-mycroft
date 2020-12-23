@@ -116,20 +116,19 @@ Same as for the requirements section.
 
 ## Example Playbook
 
-Inventory file with `rpi` which has one host named `rpi4b01` with the IP address `192.168.1.97`
+Inventory file with `rpi` which has one host named `rpi4b01` with the IP address `192.168.1.97`.
 
 ```
 [rpi]
-rpi4b01 ansible_host=192.168.1.97
+rpi4b01 ansible_host=192.168.1.97 ansible_user=pi
 ```
 
-Basic playbook running on `rpi` using the `pi` user to connect via SSH with some custom variables
+Basic playbook running on `rpi` using the `pi` user to connect via SSH _(based on the inventory)_ with some custom variables.
 
 ```
 ---
 - hosts: rpi
-  user: pi
-  become: true
+  become: yes
 
   vars:
     mycroft_version: dev
@@ -138,7 +137,7 @@ Basic playbook running on `rpi` using the `pi` user to connect via SSH with some
 
   tasks:
     - import_role:
-        name: ansible-role-mycroft
+        name: smartgic.mycroft
       tags:
         - mycroft
 ```
@@ -149,24 +148,25 @@ The next playbook, installs Python, uses `prepi` and `mycroft` Ansible roles usi
 ---
 - hosts: rpi
   gather_facts: no
-  become: true
+  become: yes
 
+  # Install Python using raw module to make sure requirements are installed
   pre_tasks:
     - name: Install Python 3.x Ansible requirement
       raw: apt-get install -y python3
       changed_when: no
 
 - hosts: rpi
-  become: true
+  become: yes
 
   tasks:
     - import_role:
-        name: ansible-role-prepi
+        name: smartgic.prepi
       tags:
         - prepi
 
     - import_role:
-        name: ansible-role-mycroft
+        name: smartgic.mycroft
       tags:
         - mycroft
 ```
