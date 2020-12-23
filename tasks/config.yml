@@ -9,7 +9,7 @@
     path: /etc/pulse/default.pa
     regexp: "^load-module module-udev-detect"
     line: "load-module module-udev-detect tsched=0"
-  when: detect.stat.exists == True
+  when: detect.stat.exists
   notify: restart-pulseaudio
 
 - name: Pulseaudio sample configuration
@@ -27,13 +27,5 @@
   template:
     src: "mycroft-core/mycroft.conf.j2"
     dest: "{{ _mycroft_home }}/.mycroft/mycroft.conf"
-  register: configuration
-
-- name: Apply Mycroft configuration
-  shell:
-    cmd: |
-      source venv-activate.sh
-      python -m mycroft.messagebus.send "configuration.updated" "{}"
-    chdir: "{{ _mycroft_core_directory }}"
-    executable: /bin/bash
-  when: configuration.changed
+    mode: 0644
+  notify: apply-mycroft-configuration

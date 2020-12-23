@@ -9,8 +9,7 @@
 
 - name: Update pip package
   pip:
-    name: pip
-    state: latest
+    name: pip==20.3.3
 
 - name: Create Mycroft AI virtualenv
   pip:
@@ -25,6 +24,7 @@
   template:
     src: virtualenv/_virtualenv_path_extensions.pth.j2
     dest: "{{ _mycroft_core_directory }}/.venv/lib/python{{ python_version }}/site-packages/_virtualenv_path_extensions.pth"
+    mode: 0644
 
 - name: Install extra requirements in Mycroft AI virtualenv
   pip:

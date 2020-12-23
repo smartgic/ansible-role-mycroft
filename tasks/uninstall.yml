@@ -9,7 +9,7 @@
     name: "{{ item }}"
     state: stopped
   loop: "{{ _mycroft_services }}"
-  when: unit.stat.exists == True
+  when: unit.stat.exists
 
 - name: Remove Mycroft directories and files
   file:

@@ -18,6 +18,7 @@
     state: directory
     owner: "{{ mycroft_user }}"
     group: "{{ mycroft_user }}"
+    mode: 0755
   loop:
     - "{{ _mycroft_skills_directory }}"
     - "{{ _mycroft_logs_directory }}"
@@ -29,6 +30,7 @@
     state: directory
     owner: "{{ mycroft_user }}"
     group: "{{ mycroft_user }}"
+    mode: 0755
 
 - name: Create skills symlink to {{ _mycroft_skills_directory }}
   file:
@@ -42,6 +44,7 @@
   template:
     src: mycroft-core/profile_mycroft.j2
     dest: "{{ _mycroft_home }}/.profile_mycroft"
+    mode: 0644
 
 - name: Adding Mycroft commands to PATH
   blockinfile:
@@ -54,6 +57,7 @@
   template:
     src: mycroft-core/dev_opts.json.j2
     dest: "{{ _mycroft_core_directory }}/.dev_opts.json"
+    mode: 0644
   when: mycroft_branch is defined and mycroft_branch == "dev"
 
 - name: Install Git pre-commit hook

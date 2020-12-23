@@ -3,6 +3,7 @@
   template:
     src: "etc/systemd/system/{{ item }}.service.j2"
     dest: "/etc/systemd/system/{{ item }}.service"
+    mode: 0644
   loop: "{{ _mycroft_services }}"
   notify:
     - daemon-reload

@@ -9,6 +9,7 @@
     state: directory
     owner: "{{ mycroft_user }}"
     group: "{{ mycroft_user }}"
+    mode: 0755
 
 - name: Mount {{ _mycroft_ramdisk_directory }} as tmpfs
   mount:
