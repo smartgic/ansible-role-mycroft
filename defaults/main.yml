@@ -2,18 +2,18 @@
 mycroft_git_repo: https://github.com/MycroftAI/mycroft-core.git
 mycroft_branch: master
 mycroft_user: pi
-mycroft_autoupdate: yes
-mycroft_precommit_hook: yes
-mycroft_extras_requirements: yes
-mycroft_tests_requirements: no
-mycroft_install_mimic: no
+mycroft_autoupdate: true
+mycroft_precommit_hook: true
+mycroft_extras_requirements: true
+mycroft_tests_requirements: false
+mycroft_install_mimic: false
 mycroft_skills_update_interval: 6.0
 mycroft_recording_timeout_with_silence: 1.0
-mycroft_confirm_listening: yes
+mycroft_confirm_listening: true
 mycroft_log_level: INFO
 mycroft_voice_tts: mimic2
 mycroft_name: picroft
-mycroft_uninstall: no
+mycroft_uninstall: false
 mycroft_extra_skills:
   - https://github.com/JarbasSkills/skill-ddg.git
   - https://github.com/JarbasSkills/skill-wolfie.git
