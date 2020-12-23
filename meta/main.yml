@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: mycroft
   author: Gaëtan Trellu - goldyfruit
   description: Install and configure Mycroft AI Core from GitHub repository
   company: Smart'Gic
