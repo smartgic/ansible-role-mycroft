@@ -13,6 +13,7 @@ The main differences with `dev_setup.sh` are the following:
 - RAMDisk support for IPC
 - File configuration support
 - Pulseaudio optimizations
+- Install and configure Mycroft AI Core on multiple hosts at the same time with the same configuration
 
 `pairing-code.sh` script is generated during the installation process, this script helps you to retrieve the pairing code if you don't hear it.
 
@@ -28,21 +29,21 @@ When running on a Raspberry Pi, the `prepi` Ansible role is recommended but not 
 
 Using the `prepi` Ansible role will ensure your Raspberry Pi to be properly configured for the best of Mycroft experience.
 
-The `prepi` Ansible role will perform the following tasks (depending your wish):
+The `prepi` Ansible role will perform the following tasks _(depending your wish)_:
 
-- Update firmware using the `next` branch which provide kernel 5.10 (customizable)
-- Update EEPROM using the `beta` version (customizable)
+- Update firmware using the `next` branch which provide kernel 5.10 _(customizable)_
+- Update EEPROM using the `beta` version _(customizable)_
 - Setup `initial_turbo` to speedup the boot process
-- Overclock the Raspberry Pi to 2Ghz (customizable)
+- Overclock the Raspberry Pi to 2Ghz _(customizable)_
 - Mount `/tmp` on a RAMDisk for Mycroft TTS cache files
 - Optimize `/` partition mount options to improve SDcard read/write
-- Enable I2C, SPI & UART interfaces (customizable)
-- Set CPU governor to `performance` to avoid context switching between the `idle*` kernel functions (customizable)
-- Install and configure PulseAudio (customizable)
+- Enable I2C, SPI & UART interfaces _(customizable)_
+- Set CPU governor to `performance` to avoid context switching between the `idle*` kernel functions _(customizable)_
+- Install and configure PulseAudio _(customizable)_
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `defaults/main.yml`):
+Available variables are listed below, along with default values _(see `defaults/main.yml`)_:
 
 ```
 # Mycroft AI Core Git repository
@@ -182,4 +183,4 @@ MIT
 
 ## Author Information
 
-I'm [Gaëtan Trellu (goldyfruit)](https://smartgic.io/), let's discuss :)
+I'm [Gaëtan Trellu (goldyfruit)](https://smartgic.io/), let's discuss :) - 2020
