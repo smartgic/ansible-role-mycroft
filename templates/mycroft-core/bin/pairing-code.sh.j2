@@ -1,0 +1,16 @@
+#!/bin/bash
+
+skills_log={{ _mycroft_logs_directory }}/skills.log
+string="Pairing code"
+
+if grep -q "${string}" $skills_log; then
+    data=$(grep "${string}" $skills_log | tail -n 1)
+    code=$(echo $data | awk '{ print $NF }' )
+    code_time=$(echo $data | awk '{ print $1" "$2 }')
+    
+    echo "Pairing code: ${code}"
+    echo "Generated: ${code_time}"
+else
+    echo "No pairing code found, maybe the device has been already paired."
+    exit 1
+fi

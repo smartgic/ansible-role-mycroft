@@ -1,0 +1,95 @@
+---
+- name: Get Mycroft AI core
+  git:
+    repo: "{{ mycroft_git_repo }}"
+    dest: "{{ _mycroft_core_directory }}"
+    version: "{{ mycroft_branch }}"
+
+- name: Use specific commit message template
+  git_config:
+    scope: local
+    name: commit.template
+    value: .gitmessage
+    repo: "{{ _mycroft_core_directory }}"
+
+- name: Create required directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ mycroft_user }}"
+    group: "{{ mycroft_user }}"
+  loop:
+    - "{{ _mycroft_skills_directory }}"
+    - "{{ _mycroft_logs_directory }}"
+  become: true
+
+- name: Create .mycroft directory
+  file:
+    path: "{{ _mycroft_home }}/.mycroft"
+    state: directory
+    owner: "{{ mycroft_user }}"
+    group: "{{ mycroft_user }}"
+
+- name: Create skills symlink to {{ _mycroft_skills_directory }}
+  file:
+    src: "{{ _mycroft_skills_directory }}"
+    dest: "{{ _mycroft_core_directory }}/skills"
+    state: link
+    owner: "{{ mycroft_user }}"
+    group: "{{ mycroft_user }}"
+
+- name: Create .profile_mycroft file
+  template:
+    src: mycroft-core/profile_mycroft.j2
+    dest: "{{ _mycroft_home }}/.profile_mycroft"
+
+- name: Adding Mycroft commands to PATH
+  blockinfile:
+    path: "{{ _mycroft_home }}/.profile"
+    block: |
+      # include Mycroft commands
+      source ~/.profile_mycroft
+
+- name: Configure .dev_opts.json
+  template:
+    src: mycroft-core/dev_opts.json.j2
+    dest: "{{ _mycroft_core_directory }}/.dev_opts.json"
+  when: mycroft_branch is defined and mycroft_branch == "dev"
+
+- name: Install Git pre-commit hook
+  shell:
+    cmd: |
+      echo "#!{{ _mycroft_core_directory }}/.venv/bin/python" > {{ _mycroft_core_directory }}/.git/hooks/pre-commit
+      echo "# MYCROFT DEV SETUP" >> {{ _mycroft_core_directory }}/.git/hooks/pre-commit
+      cat ./scripts/pre-commit >> {{ _mycroft_core_directory }}/.git/hooks/pre-commit
+    chdir: "{{ _mycroft_core_directory }}"
+    executable: /bin/bash
+    creates: "{{ _mycroft_core_directory }}/.git/hooks/pre-commit"
+  when: mycroft_precommit_hook is defined and mycroft_precommit_hook | bool
+
+- name: Make Git pre-commit hook executable
+  file:
+    path: "{{ _mycroft_core_directory }}/.git/hooks/pre-commit"
+    mode: 0755
+  when: mycroft_precommit_hook is defined and mycroft_precommit_hook | bool
+
+- name: Generates .installed file
+  shell:
+    cmd: |
+      md5sum requirements/requirements.txt \
+             requirements/extra-audiobackend.txt \
+             requirements/extra-stt.txt \
+             requirements/extra-mark1.txt \
+             requirements/tests.txt \
+             dev_setup.sh > .installed
+    chdir: "{{ _mycroft_core_directory }}"
+    executable: /bin/bash
+    creates: "{{ _mycroft_core_directory }}/.installed"
+
+- name: Generate pairing-code.sh script
+  template:
+    src: "mycroft-core/bin/pairing-code.sh.j2"
+    dest: "{{ _mycroft_core_directory }}/bin/pairing-code.sh"
+    owner: "{{ mycroft_user }}"
+    group: "{{ mycroft_user }}"
+    mode: 0755

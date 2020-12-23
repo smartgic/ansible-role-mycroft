@@ -1,0 +1,26 @@
+#!/bin/bash
+
+working_directory={{ _mycroft_core_directory }}
+log_file={{ _mycroft_logs_directory }}/autoupdate.log
+
+cd $working_directory
+
+if [ -f .dev_opts.json ]; then
+    auto_update=$(jq -r ".auto_update" < .dev_opts.json 2>> $log_file)
+else
+    auto_update="false"
+fi
+
+if [ "$auto_update" == "true" ]; then
+    git pull
+fi
+
+if [ ! -f .installed ] || ! md5sum -c &>> $log_file < .installed; then
+    if [ "$auto_update" == "true" ]; then
+        echo "Updating dependencies..." &>> $log_file
+        bash dev_setup.sh &>> $log_file
+    else
+        echo "Please update dependencies by running ${working_directory}/dev_setup.sh again." &>> $log_file
+        exit 1
+    fi
+fi

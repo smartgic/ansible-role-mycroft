@@ -1,0 +1,8 @@
+- name: Install Mimic (could take a while)
+  shell:
+    cmd: |
+      ./scripts/install-mimic.sh {{ ansible_processor_nproc }}
+    chdir: "{{ _mycroft_core_directory }}"
+    executable: /bin/bash
+    creates: "{{ _mycroft_core_directory }}/mimic"
+  when: mycroft_install_mimic is defined and mycroft_install_mimic | bool

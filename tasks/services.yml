@@ -1,0 +1,19 @@
+---
+- name: Create systemd services
+  template:
+    src: "etc/systemd/system/{{ item }}.service.j2"
+    dest: "/etc/systemd/system/{{ item }}.service"
+  loop: "{{ _mycroft_services }}"
+  notify:
+    - daemon-reload
+    - restart-mycroft
+
+- name: Force all notified handlers to run at this point
+  meta: flush_handlers
+
+- name: Start Mycroft AI services
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  loop: "{{ _mycroft_services }}"

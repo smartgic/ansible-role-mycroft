@@ -1,0 +1,57 @@
+---
+- name: Check if mycroft-bus systemd unit file exists
+  stat:
+    path: /etc/systemd/system/mycroft-bus.service
+  register: unit
+
+- name: Stop Mycroft services
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+  loop: "{{ _mycroft_services }}"
+  when: unit.stat.exists == True
+
+- name: Remove Mycroft directories and files
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ _mycroft_core_directory }}"
+    - "{{ _mycroft_skills_directory }}"
+    - "/opt/mycroft"
+    - "{{ _mycroft_home }}/.mycroft"
+    - "{{ _mycroft_home }}/.config/mycroft"
+    - /ramdisk/mycroft
+    - /tmp/mycroft
+    - /tmp/mycroft.json
+    - "{{ _mycroft_home }}/.mycroft_cli.conf"
+    - "{{ _mycroft_home }}/.profile_mycroft"
+    - "{{ _mycroft_home }}/.asoundrc"
+    - /var/tmp/mycroft_web_cache.json
+    - /tmp/mycroft-msm.lck
+    - /tmp/msm_lock
+    - /tmp/identity-lock
+
+- name: Remove Mycroft commands from PATH
+  blockinfile:
+    path: "{{ _mycroft_home }}/.profile"
+    block: |
+      # include Mycroft commands
+      source ~/.profile_mycroft
+    state: absent
+
+- name: Remove systemd unit files
+  file:
+    path: "/etc/systemd/system/{{ item }}.service"
+    state: absent
+  loop: "{{ _mycroft_services }}"
+
+- name: Uninstall packages
+  package:
+    name: "{{ _mycroft_packages }}"
+    state: absent
+
+- name: Packages cleaning
+  apt:
+    autoclean: yes
+    autoremove: yes

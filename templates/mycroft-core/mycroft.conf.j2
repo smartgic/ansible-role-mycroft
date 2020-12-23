@@ -1,0 +1,25 @@
+#jinja2: lstrip_blocks: True
+{
+  "confirm_listening": {{ mycroft_confirm_listening | lower }},
+  "listener": {
+    "recording_timeout_with_silence": {{ mycroft_recording_timeout_with_silence }}
+  },
+  "enclosure": {
+    "platform": "{{ mycroft_name }}"
+  },
+  "ipc_path": "{{ _mycroft_ipc }}",
+  "log_level": "{{ mycroft_log_level }}",
+  "skills": {
+    "update_interval": {{ mycroft_skills_update_interval }}
+  },
+  "tts": {
+    "mimic": {
+      "path": "{{ _mycroft_core_directory }}/mimic/bin/mimic"
+    },
+    "module": "{{ mycroft_voice_tts }}"
+  }{% if mycroft_log_level == "DEBUG" %},
+  "debug": true
+  {% else %},
+  "debug": false
+  {% endif %}
+}

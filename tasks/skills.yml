@@ -1,0 +1,17 @@
+---
+- name: Install extra skills
+  shell:
+    cmd: |
+      source  {{ _mycroft_core_directory }}/venv-activate.sh
+      msm install {{ item }} | grep AlreadyInstalled || true
+    executable: /bin/bash
+    chdir: "{{ _mycroft_core_directory }}"
+    creates: "{{ _mycroft_core_directory }}/.extra_skills_installed"
+  loop: "{{ mycroft_extra_skills }}"
+
+- name: Create .extra_skills_installed file
+  copy:
+    content: |
+      {{ mycroft_extra_skills }}
+    dest: "{{ _mycroft_core_directory }}/.extra_skills_installed"
+  notify: restart-mycroft-skills

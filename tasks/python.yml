@@ -1,0 +1,53 @@
+---
+- name: Install Python packages
+  package:
+    name:
+      - python3-pip
+      - python3-venv
+      - python3-dev
+      - python3-wheel
+
+- name: Update pip package
+  pip:
+    name: pip
+    state: latest
+
+- name: Create Mycroft AI virtualenv
+  pip:
+    requirements: "{{ _mycroft_core_directory }}/requirements/requirements.txt"
+    virtualenv: "{{ _mycroft_core_directory }}/.venv"
+    virtualenv_command: python3 -m venv
+    virtualenv_site_packages: yes
+
+- name: Add mycroft-core to the virtualenv path
+  vars:
+    python_version: "{{ ansible_python_version | regex_replace('^(.*)(\\.[0-9]*)$', '\\1') }}"
+  template:
+    src: virtualenv/_virtualenv_path_extensions.pth.j2
+    dest: "{{ _mycroft_core_directory }}/.venv/lib/python{{ python_version }}/site-packages/_virtualenv_path_extensions.pth"
+
+- name: Install extra requirements in Mycroft AI virtualenv
+  pip:
+    requirements: "{{ _mycroft_core_directory }}/requirements/{{ item }}"
+    virtualenv: "{{ _mycroft_core_directory }}/.venv"
+
+  loop:
+    - extra-audiobackend.txt
+    - extra-stt.txt
+    - extra-mark1.txt
+  when: mycroft_extras_requirements is defined and mycroft_extras_requirements | bool
+
+- name: Install tests requirements in Mycroft AI virtualenv
+  pip:
+    requirements: "{{ _mycroft_core_directory }}/requirements/tests.txt"
+    virtualenv: "{{ _mycroft_core_directory }}/.venv"
+  when: mycroft_tests_requirements is defined and mycroft_tests_requirements | bool
+
+- name: Install py_mplayer, boto3 and pyopenssl dependencies
+  pip:
+    name: "{{ item }}"
+    virtualenv: "{{ _mycroft_core_directory }}/.venv"
+  loop:
+    - boto3
+    - git+https://github.com/JarbasAl/py_mplayer.git
+    - pyopenssl

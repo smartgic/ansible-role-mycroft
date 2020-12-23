@@ -1,0 +1,15 @@
+[Unit]
+Documentation=https://mycroft-ai.gitbook.io/docs/mycroft-technologies/mycroft-core
+Description=Mycroft AI Voice Assistant - Auto-update service
+After=mycroft-autoupdate.service
+Before=mycroft-bus.service mycroft-enclosure.service mycroft-audio.service mycroft-voice.service mycroft-skills.service
+
+[Service]
+Type=oneshot
+WorkingDirectory={{ _mycroft_core_directory }}
+User={{ mycroft_user }}
+Group={{ mycroft_user }}
+ExecStart={{ _mycroft_core_directory }}/bin/autoupdate.sh
+
+[Install]
+WantedBy=multi-user.target

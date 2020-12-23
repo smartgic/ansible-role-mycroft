@@ -1,0 +1,21 @@
+---
+- name: daemon-reload
+  systemd:
+    daemon-reload: yes
+
+- name: restart-mycroft
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+    enabled: yes
+  loop: "{{ _mycroft_services }}"
+
+- name: restart-mycroft-skills
+  systemd:
+    name: mycroft-skills
+    state: restarted
+
+- name: restart-pulseaudio
+  systemd:
+    name: pulseaudio
+    state: restarted

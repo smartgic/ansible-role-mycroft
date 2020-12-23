@@ -1,0 +1,17 @@
+[Unit]
+Documentation=https://mycroft-ai.gitbook.io/docs/mycroft-technologies/mycroft-core/message-bus
+Description=Mycroft AI Voice Assistant - Message bus service
+After=mycroft-autoupdate.service
+
+[Service]
+WorkingDirectory={{ _mycroft_core_directory }}
+User={{ mycroft_user }}
+Group={{ mycroft_user }}
+ExecStart={{ _mycroft_core_directory }}/.venv/bin/python -m mycroft.messagebus.service
+StandardOutput=append:{{ _mycroft_logs_directory }}/bus.log
+StandardError=append:{{ _mycroft_logs_directory }}/bus.log
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target

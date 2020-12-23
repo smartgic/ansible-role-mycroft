@@ -1,0 +1,36 @@
+---
+_mycroft_home: "/home/{{ mycroft_user }}"
+_mycroft_core_directory: "{{ _mycroft_home }}/mycroft-core"
+_mycroft_skills_directory: /opt/mycroft/skills
+_mycroft_logs_directory: /var/log/mycroft
+_mycroft_ramdisk_directory: /ramdisk
+_mycroft_services:
+  - mycroft-audio
+  - mycroft-bus
+  - mycroft-enclosure
+  - mycroft-skills
+  - mycroft-voice
+_mycroft_ipc: /ramdisk/mycroft/ipc/
+_mycroft_packages:
+  - git
+  - jq
+  - libtool
+  - libffi-dev
+  - libssl-dev
+  - autoconf
+  - automake
+  - bison
+  - swig
+  - libglib2.0-dev
+  - portaudio19-dev
+  - mpg123
+  - screen
+  - flac
+  - curl
+  - libicu-dev
+  - pkg-config
+  - libjpeg-dev
+  - libfann-dev
+  - build-essential
+  - pulseaudio
+  - pulseaudio-utils

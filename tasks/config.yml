@@ -1,0 +1,39 @@
+---
+- name: Raspberry Pi OS detection
+  stat:
+    path: /etc/rpi-issue
+  register: detect
+
+- name: Ensure tsched=0 is set for module-udev-detect
+  lineinfile:
+    path: /etc/pulse/default.pa
+    regexp: "^load-module module-udev-detect"
+    line: "load-module module-udev-detect tsched=0"
+  when: detect.stat.exists == True
+  notify: restart-pulseaudio
+
+- name: Pulseaudio sample configuration
+  blockinfile:
+    path: /etc/pulse/daemon.conf
+    block: |
+      # Mycroft optimization
+      resample-method = ffmpeg
+      default-sample-format = s24le
+      default-sample-rate = 48000
+      alternate-sample-rate = 44100
+  notify: restart-pulseaudio
+
+- name: Create Mycroft configuration
+  template:
+    src: "mycroft-core/mycroft.conf.j2"
+    dest: "{{ _mycroft_home }}/.mycroft/mycroft.conf"
+  register: configuration
+
+- name: Apply Mycroft configuration
+  shell:
+    cmd: |
+      source venv-activate.sh
+      python -m mycroft.messagebus.send "configuration.updated" "{}"
+    chdir: "{{ _mycroft_core_directory }}"
+    executable: /bin/bash
+  when: configuration.changed

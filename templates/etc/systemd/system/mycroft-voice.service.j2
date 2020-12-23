@@ -1,0 +1,18 @@
+[Unit]
+Documentation=https://mycroft-ai.gitbook.io/docs/mycroft-technologies/mycroft-core/voice-service
+Description=Mycroft AI Voice Assistant - Voice service
+After=mycroft-autoupdate.service mycroft-audio.service
+Requires=mycroft-audio.service
+
+[Service]
+WorkingDirectory={{ _mycroft_core_directory }}
+User={{ mycroft_user }}
+Group={{ mycroft_user }}
+ExecStart={{ _mycroft_core_directory }}/.venv/bin/python -m mycroft.client.speech
+StandardOutput=append:{{ _mycroft_logs_directory }}/voice.log
+StandardError=append:{{ _mycroft_logs_directory }}/voice.log
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target

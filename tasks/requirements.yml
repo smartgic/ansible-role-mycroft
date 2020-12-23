@@ -1,0 +1,19 @@
+---
+- name: Install required packages
+  package:
+    name: "{{ _mycroft_packages }}"
+
+- name: Create {{ _mycroft_ramdisk_directory }} mountpoint
+  file:
+    path: "{{ _mycroft_ramdisk_directory }}"
+    state: directory
+    owner: "{{ mycroft_user }}"
+    group: "{{ mycroft_user }}"
+
+- name: Mount {{ _mycroft_ramdisk_directory }} as tmpfs
+  mount:
+    path: "{{ _mycroft_ramdisk_directory }}"
+    src: tmpfs
+    fstype: tmpfs
+    opts: "defaults,noatime,nodiratime,nosuid,nodev,noexec,size=512M"
+    state: mounted

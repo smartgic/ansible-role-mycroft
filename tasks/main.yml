@@ -1,0 +1,23 @@
+---
+- import_tasks: requirements.yml
+
+- import_tasks: install.yml
+  become: false
+
+- import_tasks: python.yml
+  become: false
+
+- import_tasks: install-mimic.yml
+  become: false
+
+- import_tasks: autoupdate.yml
+
+- import_tasks: services.yml
+
+- import_tasks: config.yml
+  become: false
+  tags: ["mycroft-config"]
+
+- import_tasks: skills.yml
+  become: false
+  when: mycroft_extra_skills is defined and mycroft_extra_skills | length > 0
