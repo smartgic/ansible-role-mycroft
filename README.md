@@ -90,12 +90,6 @@ mycroft_skills_update_interval: 6.0
 #  - DEBUG
 mycroft_log_level: INFO
 
-# Default TTS (Text-To-Speech) to use, by default three options are available
-#  - mimic
-#  - mimic2
-#  - google
-mycroft_voice_tts: mimic2
-
 # Enclosure platform name
 # picroft and mycroft_mark_1 are recognized which set a little icon on home.mycroft.ai
 #  - picroft
