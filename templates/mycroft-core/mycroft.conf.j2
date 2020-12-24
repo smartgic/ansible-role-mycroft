@@ -11,12 +11,12 @@
   "log_level": "{{ mycroft_log_level }}",
   "skills": {
     "update_interval": {{ mycroft_skills_update_interval }}
-  },
+  }{% if mycroft_install_mimic | bool %},
   "tts": {
     "mimic": {
       "path": "{{ _mycroft_core_directory }}/mimic/bin/mimic"
     }
-  }{% if mycroft_log_level == "DEBUG" %},
+  }{% endif %}{% if mycroft_log_level == "DEBUG" %},
   "debug": true
   {% else %},
   "debug": false
