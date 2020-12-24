@@ -11,7 +11,7 @@ ExecStart={{ _mycroft_core_directory }}/.venv/bin/python -m mycroft.messagebus.s
 StandardOutput=append:{{ _mycroft_logs_directory }}/bus.log
 StandardError=append:{{ _mycroft_logs_directory }}/bus.log
 ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/bin/kill -s TERM $MAINPID
+ExecStop=/bin/kill -s KILL $MAINPID
 
 [Install]
 WantedBy=multi-user.target

@@ -12,7 +12,7 @@ ExecStart={{ _mycroft_core_directory }}/.venv/bin/python -m mycroft.client.enclo
 StandardOutput=append:{{ _mycroft_logs_directory }}/enclosure.log
 StandardError=append:{{ _mycroft_logs_directory }}/enclosure.log
 ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/bin/kill -s TERM $MAINPID
+ExecStop=/bin/kill -s KILL $MAINPID
 
 [Install]
 WantedBy=multi-user.target
