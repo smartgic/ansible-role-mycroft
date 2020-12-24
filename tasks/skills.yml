@@ -6,7 +6,6 @@
       msm install {{ item }} | grep AlreadyInstalled || true
     executable: /bin/bash
     chdir: "{{ _mycroft_core_directory }}"
-    creates: "{{ _mycroft_core_directory }}/.extra_skills_installed"
   loop: "{{ mycroft_extra_skills }}"
 
 - name: Create .extra_skills_installed file
