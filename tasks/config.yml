@@ -11,6 +11,7 @@
     line: "load-module module-udev-detect tsched=0"
   when: detect.stat.exists
   notify: restart-pulseaudio
+  become: yes
 
 - name: Pulseaudio sample configuration
   blockinfile:
@@ -22,6 +23,8 @@
       default-sample-rate = 48000
       alternate-sample-rate = 44100
   notify: restart-pulseaudio
+  become: yes
+
 
 - name: Create Mycroft configuration
   template:
