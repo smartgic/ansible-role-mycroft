@@ -1,4 +1,16 @@
 ---
+- name: Remove Mycroft configuration from PulseAudio
+  blockinfile:
+    path: /etc/pulse/daemon.conf
+    block: |
+      # Mycroft optimization
+      resample-method = ffmpeg
+      default-sample-format = s24le
+      default-sample-rate = 48000
+      alternate-sample-rate = 44100
+    state: absent
+  notify: restart-pulseaudio
+
 - name: Check if mycroft-bus systemd unit file exists
   stat:
     path: /etc/systemd/system/mycroft-bus.service
