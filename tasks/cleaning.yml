@@ -8,8 +8,12 @@
   changed_when: no
 
 - name: Purge pip cache
-  command: |
-    pip cache purge
+  shell:
+    cmd: |
+      pip cache purge
+    executable: /bin/bash
+    warn: no
+  changed_when: no
 
 - name: Packages cleaning
   shell:
@@ -19,3 +23,5 @@
       apt-get clean
       sync
     executable: /bin/bash
+    warn: no
+  changed_when: no
