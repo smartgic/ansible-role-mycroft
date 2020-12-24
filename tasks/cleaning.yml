@@ -10,7 +10,7 @@
 - name: Purge pip cache
   shell:
     cmd: |
-      pip cache purge
+      pip cache purge || true
     executable: /bin/bash
     warn: no
   changed_when: no
