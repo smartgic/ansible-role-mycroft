@@ -26,7 +26,6 @@ _mycroft_packages:
   - mpg123
   - screen
   - flac
-  - curl
   - libicu-dev
   - pkg-config
   - libjpeg-dev

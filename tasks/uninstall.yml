@@ -52,6 +52,9 @@
     state: absent
 
 - name: Packages cleaning
-  apt:
-    autoclean: yes
-    autoremove: yes
+  shell:
+    cmd: |
+      apt-get autoremove -y
+      apt-get autoclean -y
+      apt-get clean
+    executable: /bin/bash
