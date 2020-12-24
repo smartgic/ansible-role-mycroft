@@ -1,7 +1,7 @@
 [Unit]
 Documentation=https://mycroft-ai.gitbook.io/docs/mycroft-technologies/mycroft-core/skills-service
 Description=Mycroft AI Voice Assistant - Skills service
-After=mycroft-autoupdate.service
+After=mycroft-autoupdate.service network.target
 Requires=mycroft-bus.service
 
 [Service]

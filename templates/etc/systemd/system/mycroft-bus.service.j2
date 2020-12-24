@@ -1,7 +1,7 @@
 [Unit]
 Documentation=https://mycroft-ai.gitbook.io/docs/mycroft-technologies/mycroft-core/message-bus
 Description=Mycroft AI Voice Assistant - Message bus service
-After=mycroft-autoupdate.service
+After=mycroft-autoupdate.service network.target
 
 [Service]
 WorkingDirectory={{ _mycroft_core_directory }}

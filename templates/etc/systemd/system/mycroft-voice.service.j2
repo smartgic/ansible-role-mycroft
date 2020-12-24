@@ -1,7 +1,7 @@
 [Unit]
 Documentation=https://mycroft-ai.gitbook.io/docs/mycroft-technologies/mycroft-core/voice-service
 Description=Mycroft AI Voice Assistant - Voice service
-After=mycroft-autoupdate.service mycroft-audio.service
+After=mycroft-autoupdate.service mycroft-audio.service network.target
 Requires=mycroft-audio.service
 
 [Service]

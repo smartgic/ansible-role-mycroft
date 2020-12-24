@@ -1,7 +1,7 @@
 [Unit]
 Documentation=https://mycroft-ai.gitbook.io/docs/mycroft-technologies/mycroft-core/enclosure
 Description=Mycroft AI Voice Assistant - Enclosure service
-After=mycroft-autoupdate.service
+After=mycroft-autoupdate.service network.target
 Requires=mycroft-bus.service
 
 [Service]

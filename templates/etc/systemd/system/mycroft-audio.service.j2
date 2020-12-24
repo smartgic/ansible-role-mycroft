@@ -1,8 +1,8 @@
 [Unit]
 Documentation=https://mycroft-ai.gitbook.io/docs/mycroft-technologies/mycroft-core/audio-service
 Description=Mycroft AI Voice Assistant - Audio service
-After=mycroft-autoupdate.service pulseaudio.service
-Requires=pulseaudio.service mycroft-bus.service
+After=mycroft-autoupdate.service network.target
+Requires=mycroft-bus.service
 
 [Service]
 WorkingDirectory={{ _mycroft_core_directory }}
