@@ -7,6 +7,8 @@
     executable: /bin/bash
     chdir: "{{ _mycroft_core_directory }}"
   loop: "{{ mycroft_extra_skills }}"
+  changed_when: no
+
 
 - name: Create .extra_skills_installed file
   copy:
