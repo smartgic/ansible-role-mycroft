@@ -108,6 +108,7 @@ mycroft_extra_skills:
   - https://github.com/JarbasSkills/skill-ddg.git
   - https://github.com/JarbasSkills/skill-wolfie.git
   - https://github.com/smartgic/mycroft-wakeword-led-gpio-skill.git
+  - https://github.com/MycroftAI/skill-homeassistant.git
 ```
 
 ## Dependencies
