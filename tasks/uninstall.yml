@@ -51,10 +51,15 @@
     name: "{{ _mycroft_packages }}"
     state: absent
 
+- name: Purge pip cache
+  command: |
+    pip cache purge
+
 - name: Packages cleaning
   shell:
     cmd: |
       apt-get autoremove -y
       apt-get autoclean -y
       apt-get clean
+      sync
     executable: /bin/bash
