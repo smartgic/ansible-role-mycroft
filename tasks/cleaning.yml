@@ -1,0 +1,21 @@
+---
+- name: Remove orphan dependencies, etc...
+  shell:
+    cmd: |
+      apt-get --purge remove $(deborphan) -y
+    executable: /bin/bash
+    warn: no
+  changed_when: no
+
+- name: Purge pip cache
+  command: |
+    pip cache purge
+
+- name: Packages cleaning
+  shell:
+    cmd: |
+      apt-get autoremove -y
+      apt-get autoclean -y
+      apt-get clean
+      sync
+    executable: /bin/bash
