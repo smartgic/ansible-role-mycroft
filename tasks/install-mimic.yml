@@ -1,4 +1,14 @@
 ---
+- name: Retrieve service facts
+  service_facts:
+
+- name: Set mycroft_audio_status fact
+  vars:
+    service_name: "mycroft-audio.service"
+  set_fact:
+    mycroft_audio_status: "{{ ansible_facts.services[service_name]['state'] }}"
+  when: ansible_facts.services[service_name] is defined
+
 - name: Install Mimic (could take a while)
   shell:
     cmd: |
@@ -7,3 +17,4 @@
     executable: /bin/bash
     creates: "{{ _mycroft_core_directory }}/mimic"
   when: mycroft_install_mimic is defined and mycroft_install_mimic | bool
+  notify: restart-mycroft-audio

@@ -27,3 +27,9 @@
       python -m mycroft.messagebus.send "configuration.updated" "{}"
     chdir: "{{ _mycroft_core_directory }}"
     executable: /bin/bash
+
+- name: restart-mycroft-audio
+  systemd:
+    name: mycroft-audio
+    state: restarted
+  when: mycroft_audio_status == "running"
