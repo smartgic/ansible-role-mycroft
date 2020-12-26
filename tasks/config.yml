@@ -6,25 +6,45 @@
 
 - name: Ensure tsched=0 is set for module-udev-detect
   lineinfile:
-    path: /etc/pulse/default.pa
+    path: /home/{{ prepi_pi_user }}/.config/pulse/default.pa
     regexp: "^load-module module-udev-detect"
     line: "load-module module-udev-detect tsched=0"
-  when: detect.stat.exists
-  notify: restart-pulseaudio
-  become: yes
+    create: yes
+    mode: 0644
+  register: config_tsched
 
-- name: Pulseaudio sample configuration
+- name: Pulseaudio default configuration
   blockinfile:
-    path: /etc/pulse/daemon.conf
+    path: "/home/{{ mycroft_user }}/.config/pulse/default.pa"
+    block: |
+      # Mycroft optimization
+      unload-module module-suspend-on-idle
+      load-module module-role-ducking
+  register: config_modules
+
+- name: Pulseaudio daemon configuration
+  blockinfile:
+    path: "/home/{{ mycroft_user }}/.config/pulse/daemon.conf"
     block: |
       # Mycroft optimization
       resample-method = ffmpeg
       default-sample-format = s24le
       default-sample-rate = 48000
       alternate-sample-rate = 44100
-  notify: restart-pulseaudio
-  become: yes
+  register: config_daemon
 
+# A handler should be use in this case but for some reasons
+# there is a bug with the systemd module and the scope not
+# keep as user.
+- name: Restart PulseAudio if configuration changed
+  systemd:
+    name: pulseaudio
+    scope: user
+    state: restarted
+  when:
+    - config_tsched.changed
+    - config_modules.changed
+    - config_daemon.changed
 
 - name: Create Mycroft configuration
   template:
