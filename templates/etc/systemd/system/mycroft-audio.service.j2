@@ -8,7 +8,7 @@ Requires=mycroft-bus.service
 WorkingDirectory={{ _mycroft_core_directory }}
 User={{ mycroft_user }}
 Group={{ mycroft_user }}
-ExecStartPre=/usr/bin/pulseaudio --start
+Environment="XDG_RUNTIME_DIR=/run/user/{{ user_info.1 }}"
 ExecStart={{ _mycroft_core_directory }}/.venv/bin/python -m mycroft.audio
 StandardOutput=append:{{ _mycroft_logs_directory }}/audio.log
 StandardError=append:{{ _mycroft_logs_directory }}/audio.log
