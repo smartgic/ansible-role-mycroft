@@ -31,6 +31,8 @@
       default-sample-format = s24le
       default-sample-rate = 48000
       alternate-sample-rate = 44100
+    create: yes
+    mode: 0644
   register: config_daemon
 
 # A handler should be use in this case but for some reasons

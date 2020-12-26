@@ -15,11 +15,6 @@
     name: mycroft-skills
     state: restarted
 
-- name: restart-pulseaudio
-  systemd:
-    name: pulseaudio
-    state: restarted
-
 - name: apply-mycroft-configuration
   shell:
     cmd: |
