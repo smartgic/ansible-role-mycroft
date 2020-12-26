@@ -1,4 +1,13 @@
 ---
+- name: Retrieve {{ mycroft_user }} UID
+  getent:
+    database: passwd
+    key: "{{ mycroft_user }}"
+
+- name: Set user_info fact
+  set_fact:
+    user_info: "{{ getent_passwd[mycroft_user] }}"
+
 - name: Create systemd services
   template:
     src: "etc/systemd/system/{{ item }}.service.j2"
