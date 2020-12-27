@@ -1,8 +1,12 @@
 ---
-- name: Congratulations :)
+- name: Congratualtions message
   vars:
     post_install: |
-      The installation and configuration processes are finished!
+      ########################################
+      # MYCROFT AI VOICE ASSISTANT - SUCCESS #
+      ########################################
+      Congratulations, Mycroft AI Voice Assistant has been installed successfully!
+
       The next steps are the following:
         - Connect on your Raspberry Pi via SSH and run pairing-code.sh command
         - Create an account (if you don't have one) on https://sso.mycroft.ai/new-account
