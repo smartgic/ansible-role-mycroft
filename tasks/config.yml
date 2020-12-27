@@ -34,6 +34,9 @@
     path: "/home/{{ mycroft_user }}/.config/pulse/daemon.conf"
     block: |
       # Mycroft optimization
+      # Check bug https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/issues/1060
+      enable-shm = no
+
       resample-method = ffmpeg
       default-sample-format = s24le
       default-sample-rate = 48000
