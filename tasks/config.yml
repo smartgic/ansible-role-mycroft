@@ -19,7 +19,14 @@
     block: |
       # Mycroft optimization
       unload-module module-suspend-on-idle
+
+      .ifexists module-role-ducking.so
       load-module module-role-ducking
+      .endif
+
+      .ifexists module-echo-cancel.so
+      load-module module-echo-cancel aec_method=webrtc
+      .endif
   register: config_modules
 
 - name: Pulseaudio daemon configuration
@@ -43,10 +50,10 @@
     name: pulseaudio
     scope: user
     state: restarted
-  when:
-    - config_tsched.changed
-    - config_modules.changed
-    - config_daemon.changed
+  notify:
+    - restart-mycroft-audio
+    - restart-mycroft-voice
+  when: config_tsched.changed or config_modules.changed or config_daemon.changed
 
 - name: Create Mycroft configuration
   template:

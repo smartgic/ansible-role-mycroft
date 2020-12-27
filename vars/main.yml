@@ -31,5 +31,3 @@ _mycroft_packages:
   - libjpeg-dev
   - libfann-dev
   - build-essential
-  - pulseaudio
-  - pulseaudio-utils
