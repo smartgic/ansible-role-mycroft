@@ -19,7 +19,7 @@
       default-sample-rate = 48000
       alternate-sample-rate = 44100
     state: absent
-  register: config_demon
+  register: config_deamon
 
 # A handler should be use in this case but for some reasons
 # there is a bug with the systemd module and the scope not
