@@ -1,0 +1,12 @@
+---
+- name: Congratulations :)
+  vars:
+    post_install: |
+      The installation and configuration processes are finished!
+      The next steps are the following:
+        - Connect on your Raspberry Pi via SSH and run pairing-code.sh command
+        - Create an account (if you don't have one) on https://sso.mycroft.ai/new-account
+        - Register your Mycroft instance on https://home.mycroft.ai with the pairing code
+        - Enjoy :)
+  debug:
+    msg: {{ post_install.split('\n') }}

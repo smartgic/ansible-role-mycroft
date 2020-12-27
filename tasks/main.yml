@@ -23,3 +23,5 @@
   when: mycroft_extra_skills is defined and mycroft_extra_skills | length > 0
 
 - import_tasks: cleaning.yml
+
+- import_tasks: post-install.yml
