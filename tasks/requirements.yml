@@ -1,4 +1,21 @@
 ---
+- name: Retrieve service facts
+  service_facts:
+
+- name: Set mycroft_audio_status fact
+  vars:
+    service_name: "mycroft-audio.service"
+  set_fact:
+    mycroft_audio_status: "{{ ansible_facts.services[service_name]['state'] }}"
+  when: ansible_facts.services[service_name] is defined
+
+- name: Set mycroft_voice_status fact
+  vars:
+    service_name: "mycroft-voice.service"
+  set_fact:
+    mycroft_voice_status: "{{ ansible_facts.services[service_name]['state'] }}"
+  when: ansible_facts.services[service_name] is defined
+
 - name: Install required packages
   package:
     name: "{{ _mycroft_packages }}"
