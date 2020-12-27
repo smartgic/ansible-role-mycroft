@@ -24,4 +24,7 @@
 
 - import_tasks: cleaning.yml
 
+- name: Force all notified handlers to run at this point
+  meta: flush_handlers
+
 - import_tasks: post-install.yml
