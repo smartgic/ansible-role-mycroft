@@ -1,7 +1,17 @@
 ---
-- name: Remove Mycroft configuration from PulseAudio
+- name: Remove Mycroft configuration from PulseAudio default
   blockinfile:
-    path: /etc/pulse/daemon.conf
+    path: "/home/{{ mycroft_user }}/.config/pulse/default.pa"
+    block: |
+      # Mycroft optimization
+      unload-module module-suspend-on-idle
+      load-module module-role-ducking
+    state: absent
+  register: config_modules
+
+- name: Remove Mycroft configuration from PulseAudio daemon
+  blockinfile:
+    path: "/home/{{ mycroft_user }}/.config/pulse/daemon.conf"
     block: |
       # Mycroft optimization
       resample-method = ffmpeg
@@ -9,7 +19,19 @@
       default-sample-rate = 48000
       alternate-sample-rate = 44100
     state: absent
-  notify: restart-pulseaudio
+  register: config_demon
+
+# A handler should be use in this case but for some reasons
+# there is a bug with the systemd module and the scope not
+# keep as user.
+- name: Restart PulseAudio if configuration changed
+  systemd:
+    name: pulseaudio
+    scope: user
+    state: restarted
+  when:
+    - config_modules.changed
+    - config_daemon.changed
 
 - name: Check if mycroft-bus systemd unit file exists
   stat:
