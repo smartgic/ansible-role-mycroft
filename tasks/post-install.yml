@@ -9,4 +9,4 @@
         - Register your Mycroft instance on https://home.mycroft.ai with the pairing code
         - Enjoy :)
   debug:
-    msg: {{ post_install.split('\n') }}
+    msg: "{{ post_install.split('\n') }}"
