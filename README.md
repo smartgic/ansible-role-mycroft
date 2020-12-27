@@ -31,6 +31,7 @@ Using the `prepi` Ansible role will ensure your Raspberry Pi to be properly conf
 
 The `prepi` Ansible role will perform the following tasks _(depending your wish)_:
 
+- Update Raspberry Pi OS to the latest version
 - Update firmware using the `next` branch which provide kernel 5.10 _(customizable)_
 - Update EEPROM using the `beta` version _(customizable)_
 - Setup `initial_turbo` to speedup the boot process
