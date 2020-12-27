@@ -27,4 +27,10 @@
   systemd:
     name: mycroft-audio
     state: restarted
-  when: mycroft_audio_status == "running"
+  when: mycroft_audio_status is defined and mycroft_audio_status == "running"
+
+- name: restart-mycroft-voice
+  systemd:
+    name: mycroft-voice
+    state: restarted
+  when: mycroft_voice_status is defined and mycroft_voice_status == "running"
