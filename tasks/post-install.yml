@@ -8,9 +8,9 @@
       Congratulations, Mycroft AI Voice Assistant has been installed successfully!
 
       The next steps are the following:
-        - Connect on your Raspberry Pi via SSH and run pairing-code.sh command
-        - Create an account (if you don't have one) on https://sso.mycroft.ai/new-account
-        - Register your Mycroft instance on https://home.mycroft.ai with the pairing code
-        - Enjoy :)
+        1) Connect on your Raspberry Pi via SSH and run pairing-code.sh command
+        2) Create an account (if you don't have one) on https://sso.mycroft.ai/new-account
+        3) Register your Mycroft instance on https://home.mycroft.ai with the pairing code
+        4) Enjoy :)
   debug:
     msg: "{{ post_install.split('\n') }}"
