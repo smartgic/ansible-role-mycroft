@@ -96,7 +96,7 @@
 - name: Remove "block Mycroft message bus service port 8181" rule
   iptables:
     chain: INPUT
-    destination_port: "'{{ _mycroft_bus_port }}'"
+    destination_port: "{{ _mycroft_bus_port }}"
     protocol: tcp
     jump: DROP
     comment: "Drop connections on Mycroft message bus service"
