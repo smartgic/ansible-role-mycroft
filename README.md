@@ -14,7 +14,7 @@ The main differences with `dev_setup.sh` are the following:
 - File configuration support
 - Pulseaudio optimizations
 - Install and configure Mycroft AI Core on multiple hosts at the same time with the same configuration
-- Protect Mycroft message bus service port 8181 
+- Protect Mycroft message bus service port `8181`
 
 `pairing-code.sh` script is generated during the installation process, this script helps you to retrieve the pairing code if you don't hear it.
 
