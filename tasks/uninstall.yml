@@ -85,7 +85,17 @@
     name: "{{ _mycroft_packages }}"
     state: absent
 
-- name: Remove IPTables rule
+- name: Remove "allow localhost to communicate with port 8181" rule
+  iptables:
+    chain: INPUT
+    in_interface: lo
+    destination_port: "{{ _mycroft_bus_port }}"
+    protocol: tcp
+    jump: ACCEPT
+    comment: "Allow connections from localhost to Mycroft message bus service"
+    state: absent
+
+- name: Remove "block Mycroft message bus service port 8181" rule
   iptables:
     chain: INPUT
     destination_port: "'{{ _mycroft_bus_port }}'"

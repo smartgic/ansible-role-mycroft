@@ -1,0 +1,17 @@
+---
+- name: Allow localhost to communicate with port 8181
+  iptables:
+    chain: INPUT
+    in_interface: lo
+    destination_port: "{{ _mycroft_bus_port }}"
+    protocol: tcp
+    jump: ACCEPT
+    comment: "Allow connections from localhost to Mycroft message bus service"
+
+- name: Block Mycroft message bus service port 8181
+  iptables:
+    chain: INPUT
+    destination_port: "{{ _mycroft_bus_port }}"
+    protocol: tcp
+    jump: DROP
+    comment: "Drop connections on Mycroft message bus service"

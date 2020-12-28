@@ -18,6 +18,9 @@
   become: no
   tags: ["mycroft-config"]
 
+- import_tasks: firewall.yml
+  when: mycroft_bus_firewall is defined and mycroft_bus_firewall | bool
+
 - import_tasks: skills.yml
   become: no
   when: mycroft_extra_skills is defined and mycroft_extra_skills | length > 0
