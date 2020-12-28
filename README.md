@@ -101,6 +101,9 @@ mycroft_log_level: INFO
 #  - choose-yours
 mycroft_name: picroft
 
+# Protect Mycroft message bus port by dropping network connection on port 8181
+mycroft_bus_firewall: yes
+
 # Confirmation about Mycroft AI Core uninstall
 mycroft_uninstall: no
 

@@ -31,3 +31,4 @@ _mycroft_packages:
   - libjpeg-dev
   - libfann-dev
   - build-essential
+_mycroft_bus_port: 8181
