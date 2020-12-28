@@ -85,6 +85,15 @@
     name: "{{ _mycroft_packages }}"
     state: absent
 
+- name: Remove IPTables rule
+  iptables:
+    chain: INPUT
+    destination_port: "'{{ _mycroft_bus_port }}'"
+    protocol: tcp
+    jump: DROP
+    comment: "Drop connections on Mycroft message bus service"
+    state: absent
+
 - name: Purge pip cache
   shell:
     cmd: |
