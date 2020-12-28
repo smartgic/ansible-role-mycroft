@@ -29,9 +29,7 @@
     name: pulseaudio
     scope: user
     state: restarted
-  when:
-    - config_modules.changed
-    - config_daemon.changed
+  when: config_modules.changed or config_daemon.changed
 
 - name: Check if mycroft-bus systemd unit file exists
   stat:
