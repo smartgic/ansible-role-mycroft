@@ -13,7 +13,7 @@ mycroft_confirm_listening: yes
 mycroft_log_level: INFO
 mycroft_name: picroft
 mycroft_bus_firewall: yes
-mycroft_bus_bind_address: 0.0.0.0
+mycroft_bus_bind_address: 127.0.0.1
 mycroft_bus_ssl: yes
 mycroft_uninstall: no
 mycroft_extra_skills:

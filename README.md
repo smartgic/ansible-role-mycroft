@@ -106,8 +106,8 @@ mycroft_name: picroft
 # Protect Mycroft message bus port by dropping network connection on port 8181
 mycroft_bus_firewall: yes
 
-# Bind the Mycroft websocket on a specific IP address, by default listening on 0.0.0.0
-mycroft_bus_bind_address: "0.0.0.0"
+# Bind the Mycroft websocket on a specific IP address, by default listening on 127.0.0.1
+mycroft_bus_bind_address: "127.0.0.1"
 
 # Enable SSL encryption for Mycroft websocket
 mycroft_bus_ssl: yes
