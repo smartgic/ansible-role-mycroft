@@ -15,6 +15,7 @@ The main differences with `dev_setup.sh` are the following:
 - Pulseaudio optimizations
 - Install and configure Mycroft AI Core on multiple hosts at the same time with the same configuration
 - Protect Mycroft message bus service port `8181`
+- Secure Mycroft message bus websocket
 
 `pairing-code.sh` script is generated during the installation process, this script helps you to retrieve the pairing code if you don't hear it.
 
@@ -104,6 +105,12 @@ mycroft_name: picroft
 
 # Protect Mycroft message bus port by dropping network connection on port 8181
 mycroft_bus_firewall: yes
+
+# Bind the Mycroft websocket on a specific IP address, by default listening on 0.0.0.0
+mycroft_bus_bind_address: "0.0.0.0"
+
+# Enable SSL encryption for Mycroft websocket
+mycroft_bus_ssl: yes
 
 # Confirmation about Mycroft AI Core uninstall
 mycroft_uninstall: no

@@ -7,6 +7,10 @@
   "enclosure": {
     "platform": "{{ mycroft_name }}"
   },
+  "websocket": {
+    "host": "{{ mycroft_bus_bind_address }}",
+    "ssl": {{ mycroft_bus_ssl | lower }}
+  },
   "ipc_path": "{{ _mycroft_ipc }}",
   "log_level": "{{ mycroft_log_level }}",
   "skills": {
