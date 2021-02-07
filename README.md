@@ -1,3 +1,5 @@
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-smartgic.mycroft-green.svg?style=flat)](https://galaxy.ansible.com/smartgic/mycroft)
+
 # Ansible Role: Mycroft
 
 This Ansible role will install and configure Mycroft AI Core from GitHub repository.
