@@ -115,6 +115,9 @@ mycroft_bus_ssl: yes
 # Confirmation about Mycroft AI Core uninstall
 mycroft_uninstall: no
 
+# Use VLC backend for audio service
+mycroft_vlc_backend: yes
+
 # Install some extra skills from Git repositories, there is no limit
 # An empty variable will not install any extra skills.
 mycroft_extra_skills:

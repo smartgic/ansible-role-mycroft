@@ -24,5 +24,15 @@
   "debug": true
   {% else %},
   "debug": false
-  {% endif %}
+  {% endif %}{% if mycroft_vlc_backend | bool %},
+  "audio": {
+    "backends": {
+      "vlc": {
+        "type": "vlc",
+        "active": true,
+        "duck": true
+      }
+    },
+    "default-backend": "vlc"
+  }{% endif %}
 }

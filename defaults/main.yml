@@ -16,6 +16,7 @@ mycroft_bus_firewall: yes
 mycroft_bus_bind_address: 127.0.0.1
 mycroft_bus_ssl: yes
 mycroft_uninstall: no
+mycroft_vlc_backend: yes
 mycroft_extra_skills:
   - https://github.com/JarbasSkills/skill-ddg.git
   - https://github.com/JarbasSkills/skill-wolfie.git
