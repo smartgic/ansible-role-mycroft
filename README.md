@@ -127,6 +127,7 @@ mycroft_extra_skills:
   - https://github.com/JarbasSkills/skill-wolfie.git
   - https://github.com/JarbasSkills/skill-monkey-patcher
   - https://github.com/smartgic/mycroft-wakeword-led-gpio-skill.git
+  - https://github.com/smartgic/mycroft-finished-booting-skill.git
   - https://github.com/MycroftAI/skill-homeassistant.git
 ```
 
