@@ -11,7 +11,7 @@ mycroft_skills_update_interval: 6.0
 mycroft_recording_timeout_with_silence: 1.0
 mycroft_confirm_listening: yes
 mycroft_log_level: INFO
-mycroft_name: picroft
+mycroft_enclosure_name: picroft
 mycroft_bus_firewall: yes
 mycroft_bus_bind_address: 127.0.0.1
 mycroft_bus_ssl: yes
