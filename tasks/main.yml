@@ -2,27 +2,28 @@
 - import_tasks: requirements.yml
 
 - import_tasks: install.yml
-  become: no
+  become: false
 
 - import_tasks: python.yml
-  become: no
+  become: false
 
 - import_tasks: install-mimic.yml
-  become: no
+  become: false
 
 - import_tasks: autoupdate.yml
 
 - import_tasks: services.yml
 
 - import_tasks: config.yml
-  become: no
-  tags: ["mycroft-config"]
+  become: false
+  tags:
+    - mycroft-config
 
 - import_tasks: firewall.yml
   when: mycroft_bus_firewall is defined and mycroft_bus_firewall | bool
 
 - import_tasks: skills.yml
-  become: no
+  become: false
   when: mycroft_extra_skills is defined and mycroft_extra_skills | length > 0
 
 - import_tasks: cleaning.yml
