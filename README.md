@@ -15,14 +15,13 @@ The main differences with `dev_setup.sh` are the following:
 - `boto3`, `py_mplayer` and `pyopenssl` librairies install
 - RAMDisk support for IPC
 - File configuration support
-- Pulseaudio optimizations
+- PulseAudio optimizations
 - Install and configure Mycroft AI Core on multiple hosts at the same time with the same configuration
-- Protect Mycroft message bus service port `8181`
 - Secure Mycroft message bus websocket
 
 `pairing-code.sh` script is generated during the installation process, this script helps you to retrieve the pairing code if you don't hear it.
 
-```
+```shell
 $ pairing-code.sh
 Pairing code: HRAK77
 Generated: 2020-12-21 17:04:42.408
@@ -52,7 +51,7 @@ The `prepi` Ansible role will perform the following tasks _(depending your wish)
 
 Available variables are listed below, along with default values _(see `defaults/main.yml`)_:
 
-```
+```yaml
 # Mycroft AI Core Git repository
 mycroft_git_repo: https://github.com/MycroftAI/mycroft-core.git
 
@@ -140,14 +139,14 @@ Same as for the requirements section.
 
 Inventory file with `rpi` which has one host named `rpi4b01` with the IP address `192.168.1.97`.
 
-```
+```ini
 [rpi]
 rpi4b01 ansible_host=192.168.1.97 ansible_user=pi
 ```
 
 Basic playbook running on `rpi` using the `pi` user to connect via SSH _(based on the inventory)_ with some custom variables.
 
-```
+```yaml
 ---
 - hosts: rpi
   become: yes
@@ -166,7 +165,7 @@ Basic playbook running on `rpi` using the `pi` user to connect via SSH _(based o
 
 The next playbook, installs Python, uses `prepi` and `mycroft` Ansible roles using the same inventory file as above.
 
-```
+```yaml
 ---
 - hosts: rpi
   gather_facts: no
@@ -195,7 +194,7 @@ The next playbook, installs Python, uses `prepi` and `mycroft` Ansible roles usi
 
 Some tags are availble to trigger only required tasks from the role, such Mycroft's configuration. The `install.yml` content is from the playbook above.
 
-```
+```shell
 $ ansible-playbook -i inventory install.yml -t mycroft-config
 ```
 
@@ -205,4 +204,4 @@ MIT
 
 ## Author Information
 
-I'm [Gaëtan Trellu (goldyfruit)](https://smartgic.io/), let's discuss :) - 2020
+I'm [Gaëtan Trellu (goldyfruit)](https://smartgic.io/), let's discuss :) - 2021
