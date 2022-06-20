@@ -4,6 +4,7 @@
     repo: "{{ mycroft_git_repo }}"
     dest: "{{ _mycroft_core_directory }}"
     version: "{{ mycroft_branch }}"
+    update: no
 
 - name: Use specific commit message template
   git_config:
@@ -22,7 +23,7 @@
   loop:
     - "{{ _mycroft_skills_directory }}"
     - "{{ _mycroft_logs_directory }}"
-  become: yes
+  become: true
 
 - name: Create .mycroft directory
   file:

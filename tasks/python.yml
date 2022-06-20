@@ -11,6 +11,13 @@
   pip:
     name: wheel
 
+# Temporary fix of https://github.com/MycroftAI/mycroft-core/issues/3117
+- name: Replace PyYAML 5.4 by PyYAML 5.4.1
+  ansible.builtin.lineinfile:
+    path: "{{ _mycroft_core_directory }}/requirements/requirements.txt"
+    regexp: "^PyYAML"
+    line: PyYAML==5.4.1
+
 - name: Create Mycroft AI virtualenv
   pip:
     requirements: "{{ _mycroft_core_directory }}/requirements/requirements.txt"
