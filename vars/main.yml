@@ -32,4 +32,5 @@ _mycroft_packages:
   - libfann-dev
   - build-essential
   - vlc-plugin-base
-_mycroft_bus_port: 8181
+  - iptables
+_mycroft_bus_port: '8181'
