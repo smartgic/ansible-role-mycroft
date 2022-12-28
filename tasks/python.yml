@@ -48,5 +48,4 @@
     virtualenv: "{{ _mycroft_core_directory }}/.venv"
   loop:
     - boto3
-    - git+https://github.com/JarbasAl/py_mplayer.git
     - pyopenssl
