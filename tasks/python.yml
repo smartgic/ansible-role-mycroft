@@ -42,10 +42,11 @@
     virtualenv: "{{ _mycroft_core_directory }}/.venv"
   when: mycroft_tests_requirements is defined and mycroft_tests_requirements | bool
 
-- name: Install py_mplayer, boto3 and pyopenssl dependencies
+- name: Install boto3 and pyopenssl dependencies and custom libraires
   pip:
     name: "{{ item }}"
     virtualenv: "{{ _mycroft_core_directory }}/.venv"
   loop:
     - boto3
     - pyopenssl
+    - "{{ mycroft_pip_custom_libraries }}"

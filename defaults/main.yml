@@ -20,3 +20,4 @@ mycroft_vlc_backend: yes
 mycroft_extra_skills:
   - https://github.com/smartgic/mycroft-wakeword-led-gpio-skill.git
   - https://github.com/smartgic/mycroft-finished-booting-skill.git
+mycroft_pip_custom_libraries: []
