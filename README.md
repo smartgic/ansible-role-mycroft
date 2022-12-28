@@ -12,7 +12,8 @@ The main differences with `dev_setup.sh` are the following:
 - Idempotency
 - systemd integration
 - Extra skills installation
-- `boto3`, `py_mplayer` and `pyopenssl` librairies install
+- `boto3` and `pyopenssl` librairies install
+- Custom `pip` librairies
 - RAMDisk support for IPC
 - File configuration support
 - PulseAudio optimizations
@@ -129,6 +130,9 @@ mycroft_extra_skills:
   - https://github.com/smartgic/mycroft-wakeword-led-gpio-skill.git
   - https://github.com/smartgic/mycroft-finished-booting-skill.git
   - https://github.com/MycroftAI/skill-homeassistant.git
+
+# Install extra custom Python libraries via pip
+mycroft_pip_custom_libraries: []
 ```
 
 ## Dependencies
@@ -204,4 +208,4 @@ MIT
 
 ## Author Information
 
-I'm [Gaëtan Trellu (goldyfruit)](https://smartgic.io/), let's discuss :) - 2021
+I'm [Gaëtan Trellu (goldyfruit)](https://smartgic.io/), let's discuss :) - 2022
