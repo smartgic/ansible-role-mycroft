@@ -30,7 +30,6 @@
   pip:
     requirements: "{{ _mycroft_core_directory }}/requirements/{{ item }}"
     virtualenv: "{{ _mycroft_core_directory }}/.venv"
-
   loop:
     - extra-audiobackend.txt
     - extra-stt.txt
